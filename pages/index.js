@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from "react";
+import Link from "next/link";
 import axios from "axios";
 
 function HomePage() {
@@ -65,7 +66,11 @@ function HomePage() {
       </form>
       <h4>Feedbacks</h4>
       {feedbacks.map((feedback, i) => {
-        return <p key={i}>{feedback.feedback}</p>;
+        return (
+          <Link href={`/feedback/${feedback.email}`}>
+            <p key={i}>{feedback.feedback}</p>
+          </Link>
+        );
       })}
     </div>
   );
