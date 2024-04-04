@@ -1,1 +1,4 @@
-{"email":"hello@yopmail.com","feedback":"new feedback"}
+[
+  { "email": "hello@yopmail.com", "feedback": "new feedback" },
+  { "email": "new@yopmail.com", "feedback": "new" }
+]

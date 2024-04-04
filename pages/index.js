@@ -1,7 +1,9 @@
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import axios from "axios";
 
 function HomePage() {
+  const [feedbacks, setFeedbacks] = useState([]);
+
   const emailInput = useRef();
   const feedbackInput = useRef();
 
@@ -21,6 +23,19 @@ function HomePage() {
       console.log("Error is ", err);
     }
   }
+
+  async function fetchData() {
+    try {
+      const { data } = await axios.get(`http://localhost:3000/api/feedback`);
+      setFeedbacks(data.feedbacks);
+    } catch (err) {
+      console.log("Error is ", err);
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div>
@@ -48,6 +63,10 @@ function HomePage() {
         </div>
         <button type="submit">Submit</button>
       </form>
+      <h4>Feedbacks</h4>
+      {feedbacks.map((feedback, i) => {
+        return <p key={i}>{feedback.feedback}</p>;
+      })}
     </div>
   );
 }
